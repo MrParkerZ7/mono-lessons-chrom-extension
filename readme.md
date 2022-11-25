@@ -10,4 +10,6 @@ Remark : this demo using yarn instead of npm
   - and react webpack
   - Link
     - https://webpack.js.org/
-- 3 :
+- 3 : https://youtu.be/upG1HxVigDM
+  - manifest v3
+  - with background
