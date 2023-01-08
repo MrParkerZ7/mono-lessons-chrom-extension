@@ -31,4 +31,18 @@ chrome.runtime.onInstalled.addListener(() => {
     //create the new URL in the user's browser
     chrome.tabs.create({ url: newURL });
   });
+
+  chrome.bookmarks.create({ title: "[Chrome Exteinsion] Bookmarks Floder" }, (newFolder) => {
+    console.log("[bookmarks] added floder: ", newFolder);
+    chrome.bookmarks.create(
+      {
+        title: "[Chrome Exteinsion] Google",
+        url: "https://www.google.co.th/",
+        parentId: newFolder.id,
+      },
+      (newBookmark) => {
+        console.log("[bookmarks] added url: ", newBookmark);
+      }
+    );
+  });
 });

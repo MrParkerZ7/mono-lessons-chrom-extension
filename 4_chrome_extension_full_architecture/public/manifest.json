@@ -16,6 +16,6 @@
       "js": ["content.js"]
     }
   ],
-  "permissions": ["storage", "activeTab", "contextMenus"],
-  "options_page": "option/option.html"
+  "permissions": ["storage", "activeTab", "contextMenus", "bookmarks"],
+  "options_page": "option.html"
 }

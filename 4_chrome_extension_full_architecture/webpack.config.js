@@ -9,7 +9,7 @@ module.exports = {
     popup: "./src/popup.jsx",
     background: "./src/background.js",
     content: "./src/content.js",
-    content: "./src/option.jsx",
+    option: "./src/option/option.jsx",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -37,7 +37,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./src/option/option.html",
-      filename: "option/option.html",
+      filename: "option.html",
     }),
     new CopyPlugin({
       patterns: [{ from: "public" }],
