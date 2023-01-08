@@ -17,8 +17,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log("[background] onMessage addListener sender", sender);
 });
 
-chrome.contextMenus.create({
-  id: "1",
-  title: '[contextMenus] You wrap "%s"',
-  contexts: ["selection"],
+chrome.runtime.onInstalled.addListener(() => {
+  console.log("[OnInstall]");
+  chrome.contextMenus.create({
+    id: "1",
+    title: '[contextMenus] search google for "%s"',
+    contexts: ["selection"],
+  });
+
+  chrome.contextMenus.onClicked.addListener((info, tab) => {
+    const baseURL = "https://www.google.co.th/search?q=";
+    var newURL = baseURL + info.selectionText;
+    //create the new URL in the user's browser
+    chrome.tabs.create({ url: newURL });
+  });
 });
