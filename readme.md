@@ -13,6 +13,5 @@ Remark : this demo using yarn instead of npm
 - 3 : https://youtu.be/upG1HxVigDM
   - manifest v3
   - with background
-- 4 : 
-  - relates tutorials
-    - https://www.youtube.com/playlist?list=PLgHw_wODS1vXwH1gF_SY7IfnWzt12o70h
+- 4 : lesson 2 + new tutorial
+  - tutorial : https://youtube.com/playlist?list=PLgHw_wODS1vXwH1gF_SY7IfnWzt12o70h
