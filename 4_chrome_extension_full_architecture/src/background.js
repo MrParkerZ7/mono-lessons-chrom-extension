@@ -32,8 +32,8 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.tabs.create({ url: newURL });
   });
 
-  chrome.bookmarks.create({ title: "[Chrome Exteinsion] Bookmarks Floder" }, (newFolder) => {
-    console.log("[bookmarks] added floder: ", newFolder);
+
+  const callBackCreateUrlBook = (newFolder) => {
     chrome.bookmarks.create(
       {
         title: "[Chrome Exteinsion] Google",
@@ -44,5 +44,15 @@ chrome.runtime.onInstalled.addListener(() => {
         console.log("[bookmarks] added url: ", newBookmark);
       }
     );
-  });
+  };
+
+  const callbackCreateFolderBook = (newFolder) => {
+    console.log("[bookmarks] added floder: ", newFolder);
+    callBackCreateUrlBook(newFolder);
+  };
+
+  chrome.bookmarks.create(
+    { title: "[Chrome Exteinsion] Bookmarks Floder" },
+    callbackCreateFolderBook
+  );
 });
