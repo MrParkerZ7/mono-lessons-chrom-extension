@@ -3,12 +3,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   mode: "production",
   entry: {
     popup: "./src/popup.jsx",
-    react: "react",
-    react_dom: "react-dom",
+    background: "./src/background.js",
+    content_script: "./src/content_script.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
