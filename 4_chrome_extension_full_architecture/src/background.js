@@ -8,13 +8,19 @@ console.log("Service-Worker");
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(sender.tab ? "from " + sender.tab.url : "from unknow");
+  console.log("[background] onMessage addListener sender", sender);
+  console.log("[background] onMessage addListener request", request);
+
   if (request.greeting === "hello") {
     sendResponse({ farewell: "See you sir!" });
   } else {
     sendResponse({ farewell: "Go home sir!" });
   }
-  console.log("[background] onMessage addListener request", request);
-  console.log("[background] onMessage addListener sender", sender);
+
+  if (request.background_test_eval === true) {
+    // Find the way to fix this!
+    eval('alert("Test Eval")');
+  }
 });
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -31,7 +37,6 @@ chrome.runtime.onInstalled.addListener(() => {
     //create the new URL in the user's browser
     chrome.tabs.create({ url: newURL });
   });
-
 
   const callBackCreateUrlBook = (newFolder) => {
     chrome.bookmarks.create(
