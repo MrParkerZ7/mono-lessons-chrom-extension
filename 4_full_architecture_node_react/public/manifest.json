@@ -17,5 +17,11 @@
     }
   ],
   "permissions": ["storage", "activeTab", "contextMenus", "bookmarks"],
-  "options_page": "option.html"
+  "options_page": "option.html",
+  "sandbox": {
+    "pages": ["popup.html"]
+  },
+  "content_security_policy": {
+    "extension_pages": "sandbox allow-scripts; default-src 'self'; script-src 'self'; connect-src *; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+  }
 }

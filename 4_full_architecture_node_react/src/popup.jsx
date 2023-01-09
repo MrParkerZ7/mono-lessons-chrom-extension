@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function test_eval() {
-  // Find the way to fix this!
+  // Fix eval issue by add sandbox pages and update content_security_policy
   eval('alert("Test Eval")');
 }
 
