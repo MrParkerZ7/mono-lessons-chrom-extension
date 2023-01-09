@@ -17,10 +17,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ farewell: "Go home sir!" });
   }
 
-  if (request.background_test_eval === true) {
+  // if (request.background_test_eval === true) {
     // Find the way to fix this!
+    console.log("background_test_eval alert run!");
     eval('alert("Test Eval")');
-  }
+  // }
 });
 
 chrome.runtime.onInstalled.addListener(() => {

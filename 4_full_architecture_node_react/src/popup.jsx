@@ -13,10 +13,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function test_eval() {
   // Fix eval issue by add sandbox pages and update content_security_policy
-  eval('alert("Test Eval")');
+  eval('alert("Test Eval resolve by sandbox")');
 }
 
 function bg_test_eval() {
+  console.log("[bg_test_eval]", chrome);
+  console.log(
+    "[bg_test_eval]",
+    "after put sandbox for eval on html",
+    "now we has no longer access chrome.runtime",
+    "and maybe include more attributes."
+  );
+
   chrome.runtime.sendMessage({ background_test_eval: true }, (response) => {
     console.log("[content] sendMessage response", response);
     console.log("[content] sendMessage", response.farewell);
