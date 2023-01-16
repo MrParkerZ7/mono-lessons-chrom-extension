@@ -23,6 +23,6 @@
   },
   "content_security_policy": {
     "extension_pages": "sandbox allow-scripts; default-src 'self'; script-src 'self'; connect-src *; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;",
-    "sandbox": "sandbox allow-scripts; default-src 'self'; script-src 'self'; connect-src *; style-src * 'unsafe-eval' 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+    "sandbox": "sandbox allow-scripts; connect-src *; style-src * 'unsafe-eval' 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
   }
 }

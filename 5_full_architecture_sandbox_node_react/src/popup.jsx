@@ -12,8 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function test_eval() {
-  // Fix eval issue by add sandbox pages and update content_security_policy
-  eval('alert("Test Eval resolve by sandbox")');
+  // alert has been disable by sandbox
+  eval('alert("[test_eval] Test Eval resolve by sandbox")');
+  eval('(()=> {console.log("[test_eval] Evaled Code!!!")})()');
 }
 
 function bg_test_eval() {
