@@ -24,11 +24,18 @@ function bg_test_eval() {
     "now we has no longer access chrome.runtime",
     "and maybe include more attributes."
   );
+  console.log("[bg_test_eval]", "let use 'parent.postMessage()' instead");
 
-  chrome.runtime.sendMessage({ background_test_eval: true }, (response) => {
+  parent.postMessage({ background_test_eval: true }, (response) => {
     console.log("[content] sendMessage response", response);
     console.log("[content] sendMessage", response.farewell);
   });
+
+  console.log(
+    "[bg_test_eval]",
+    "postMessage function string",
+    parent.postMessage.toString()
+  );
 }
 
 function background_red() {
