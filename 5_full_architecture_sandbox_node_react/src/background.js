@@ -12,16 +12,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log("[background] onMessage addListener request", request);
 
   if (request.greeting === "hello") {
+    console.log("[request.greeting] hello", request.greeting);
     sendResponse({ farewell: "See you sir!" });
   } else {
+    console.log("[request.greeting] ", request.greeting);
     sendResponse({ farewell: "Go home sir!" });
   }
 
-  // if (request.background_test_eval === true) {
-    // Find the way to fix this!
-    console.log("background_test_eval alert run!");
-    eval('alert("Test Eval")');
-  // }
+  if (request.background_test_eval === true) {
+    console.log("[background_test_eval] message form popup!");
+  }
+
+  console.log("[background_eval] alert run!");
+  eval('alert("[background_eval] Test Eval resolve by sandbox")');
+  eval('(()=> {console.log("[background_eval] Evaled Code!!!")})()');
 });
 
 chrome.runtime.onInstalled.addListener(() => {
