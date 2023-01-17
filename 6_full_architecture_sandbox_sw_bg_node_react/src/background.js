@@ -4,7 +4,15 @@
  * - the working process would be similar to android/ios smartphone background running concept
  **/
 
+  // TODO: find to way to get message from popup 
+
 console.log("Service-Worker");
+console.log("Service-Worker", "chrome", chrome);
+console.log("Service-Worker", "addEventListener", addEventListener);
+
+addEventListener("message", (event) => {
+  console.log("XXX", event);
+});
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(sender.tab ? "from " + sender.tab.url : "from unknow");
@@ -23,6 +31,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log("[background_test_eval] message form popup!");
   }
 
+  // TODO: find solution for eval 
   console.log("[background_eval] alert run!");
   eval('alert("[background_eval] Test Eval resolve by sandbox")');
   eval('(()=> {console.log("[background_eval] Evaled Code!!!")})()');
