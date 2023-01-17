@@ -4,37 +4,57 @@
  * - the working process would be similar to android/ios smartphone background running concept
  **/
 
-  // TODO: find to way to get message from popup 
+// TODO: find to way to get message from popup
 
 console.log("Service-Worker");
 console.log("Service-Worker", "chrome", chrome);
 console.log("Service-Worker", "addEventListener", addEventListener);
 
-addEventListener("message", (event) => {
-  console.log("XXX", event);
-});
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log(sender.tab ? "from " + sender.tab.url : "from unknow");
-  console.log("[background] onMessage addListener sender", sender);
-  console.log("[background] onMessage addListener request", request);
-
-  if (request.greeting === "hello") {
-    console.log("[request.greeting] hello", request.greeting);
-    sendResponse({ farewell: "See you sir!" });
-  } else {
-    console.log("[request.greeting] ", request.greeting);
-    sendResponse({ farewell: "Go home sir!" });
+function test_eval(event) {
+  if (event.background_test_eval === true) {
+    console.log("[background_test_eval] message!");
   }
 
-  if (request.background_test_eval === true) {
-    console.log("[background_test_eval] message form popup!");
-  }
-
-  // TODO: find solution for eval 
+  // TODO: find solution for eval
   console.log("[background_eval] alert run!");
   eval('alert("[background_eval] Test Eval resolve by sandbox")');
   eval('(()=> {console.log("[background_eval] Evaled Code!!!")})()');
+}
+
+/**
+ * Handle message from normal sandbox
+ * but the log will show up on sandbox log where it from
+ * meas this function is call back to where the message came from
+ * found sender and sendResponse as undefined
+ */
+addEventListener("message", (event, sender, sendResponse) => {
+  console.log("[background_addEventListener] event", event);
+  console.log("[background_addEventListener] sender", sender);
+  console.log("[background_addEventListener] sendResponse", sendResponse);
+  test_eval(event);
+});
+
+/**
+ * Handle message from normal js such as content_script
+ */
+chrome.runtime.onMessage.addListener((event, sender, sendResponse) => {
+  console.log(sender.tab ? "from " + sender.tab.url : "from unknow");
+  console.log("[background] onMessage addListener sender", sender);
+  console.log("[background] onMessage addListener request", event);
+
+  if (event.greeting === "hello") {
+    console.log("[request.greeting] hello", event.greeting);
+    sendResponse({ farewell: "See you sir!" });
+  } else {
+    console.log("[request.greeting] ", event.greeting);
+    sendResponse({ farewell: "Go home sir!" });
+  }
+
+  if (event.background_test_eval === true) {
+    console.log("[background_test_eval] message form popup!");
+  }
+
+  test_eval(event);
 });
 
 chrome.runtime.onInstalled.addListener(() => {
