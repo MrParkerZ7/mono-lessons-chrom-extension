@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("test_addEventListener")
     .addEventListener("click", () => {
-      alert("Test AddEventListener");
+      alert("Test_AddEventListener");
+      eval('(()=> {console.log("[Test_AddEventListener] Evaled Code!!!")})()');
     });
 });
 
