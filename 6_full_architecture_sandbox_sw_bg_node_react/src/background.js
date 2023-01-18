@@ -10,15 +10,18 @@ console.log("Service-Worker");
 console.log("Service-Worker", "chrome", chrome);
 console.log("Service-Worker", "addEventListener", addEventListener);
 
-function test_eval(event) {
+function test_eval(event, sender, sendResponse) {
+  console.log("[background_test_eval] event", event);
+  console.log("[background_test_eval] onMessage addListener sender", sender);
+  console.log("[background_test_eval] onMessage addListener sendResponse", sendResponse);
   if (event.background_test_eval === true) {
     console.log("[background_test_eval] message!");
   }
 
   // TODO: find solution for eval
-  console.log("[background_eval] alert run!");
-  eval('alert("[background_eval] Test Eval resolve by sandbox")');
-  eval('(()=> {console.log("[background_eval] Evaled Code!!!")})()');
+  console.log("[background_test_eval] alert run!");
+  eval('alert("[background_test_eval] Test Eval resolve by sandbox")');
+  eval('(()=> {console.log("[background_test_eval] Evaled Code!!!")})()');
 }
 
 /**
@@ -28,10 +31,7 @@ function test_eval(event) {
  * found sender and sendResponse as undefined
  */
 addEventListener("message", (event, sender, sendResponse) => {
-  console.log("[background_addEventListener] event", event);
-  console.log("[background_addEventListener] sender", sender);
-  console.log("[background_addEventListener] sendResponse", sendResponse);
-  test_eval(event);
+  test_eval(event, sender, sendResponse);
 });
 
 /**
@@ -39,8 +39,6 @@ addEventListener("message", (event, sender, sendResponse) => {
  */
 chrome.runtime.onMessage.addListener((event, sender, sendResponse) => {
   console.log(sender.tab ? "from " + sender.tab.url : "from unknow");
-  console.log("[background] onMessage addListener sender", sender);
-  console.log("[background] onMessage addListener request", event);
 
   if (event.greeting === "hello") {
     console.log("[request.greeting] hello", event.greeting);
@@ -54,7 +52,7 @@ chrome.runtime.onMessage.addListener((event, sender, sendResponse) => {
     console.log("[background_test_eval] message form popup!");
   }
 
-  test_eval(event);
+  test_eval(event, sender, sendResponse);
 });
 
 chrome.runtime.onInstalled.addListener(() => {
