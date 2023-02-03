@@ -1,30 +1,16 @@
 import React from "react";
 import { render } from "react-dom";
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOMContent Are Loaded");
-
-  document
-    .getElementById("test_addEventListener")
-    .addEventListener("click", () => {
-      alert("Test AddEventListener");
-    });
-});
-
-function test_eval() {
-  // Find the way to fix this!
-  eval('alert("Test Eval")');
-}
-
-function bg_test_eval() {
-  chrome.runtime.sendMessage({ background_test_eval: true }, (response) => {
-    console.log("[content] sendMessage response", response);
-    console.log("[content] sendMessage", response.farewell);
+function test_post() {
+  chrome.runtime.sendMessage({ test_post: true }, (response) => {
+    console.log("[popup] test_post response", response);
   });
 }
 
-function background_red() {
-  document.getElementsByTagName("body")[0].style.backgroundColor = "red";
+function test_get() {
+  chrome.runtime.sendMessage({ test_get: true }, (response) => {
+    console.log("[popup] test_get response", response);
+  });
 }
 
 function Popup() {
@@ -32,16 +18,12 @@ function Popup() {
     <div>
       <h1>Hi Chrome!</h1>
       <p>Node Chrome Extension React!</p>
-      <button onClick={test_eval}>Test Eval</button>
+      <button onClick={test_post}>Test POST</button>
       <br />
       <br />
-      <button onClick={bg_test_eval}>Background Test Eval</button>
+      <button onClick={test_get}>Test GET</button>
       <br />
       <br />
-      <button onClick={background_red}>background_red</button>
-      <br />
-      <br />
-      <button id="test_addEventListener">Test AddEventListener</button>
     </div>
   );
 }

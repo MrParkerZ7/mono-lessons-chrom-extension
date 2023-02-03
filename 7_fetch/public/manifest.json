@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Chrome Extension Full Architecture",
+  "name": "Chrome Extension Full Architecture Fetch",
   "description": "Full Architecture",
   "version": "1.0",
   "action": {
@@ -9,13 +9,5 @@
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "run_at": "document_idle",
-      "js": ["content.js"]
-    }
-  ],
-  "permissions": ["storage", "activeTab", "contextMenus", "bookmarks"],
-  "options_page": "option.html"
+  "permissions": ["storage", "activeTab", "contextMenus", "bookmarks"]
 }

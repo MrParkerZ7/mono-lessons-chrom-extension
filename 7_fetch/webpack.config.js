@@ -8,8 +8,6 @@ module.exports = {
   entry: {
     popup: "./src/popup.jsx",
     background: "./src/background.js",
-    content: "./src/content.js",
-    option: "./src/option/option.jsx",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -34,10 +32,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/popup.html",
       filename: "popup.html",
-    }),
-    new HtmlWebpackPlugin({
-      template: "./src/option/option.html",
-      filename: "option.html",
     }),
     new CopyPlugin({
       patterns: [{ from: "public" }],

@@ -1,5 +1,5 @@
 {
-  "name": "chrome-extension-full-architecture",
+  "name": "chrome-extension-full-architecture-fetch",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
